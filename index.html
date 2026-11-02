@@ -1,592 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta name="description"
-        content="Krishna Mallick - Cryptography Researcher">
-
-  <title>Krishna Mallick | Cryptography Researcher</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Krishna Mallick — Cryptography Researcher">
+  <title>Krishna Mallick | Cryptography</title>
   <style>
+    :root {
+      --ink: #292929;
+      --muted: #666666;
+      --accent: #315b7d;
+      --line: #e5e0d7;
+      --soft: #f4f0e8;
+      --paper: #f8f6f1;
+    }
 
-    /* ---------- General ---------- */
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 50px 25px;
-      line-height: 1.7;
-      color: #222;
-      background: #ffffff;
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+      line-height: 1.72;
     }
-
-    a {
-      color: #2457a6;
-      text-decoration: none;
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .page { max-width: 920px; margin: 0 auto; padding: 42px 28px 28px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+    .identity { display: flex; align-items: center; gap: 26px; }
+    .photo {
+      width: 132px; height: 132px; flex: 0 0 132px;
+      object-fit: cover; border-radius: 50%; border: 1px solid var(--line);
+      background: var(--soft);
     }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-
-    /* ---------- Header ---------- */
-
-    header {
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 25px;
-      margin-bottom: 40px;
-    }
-
-    .profile {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .profile-photo {
-      width: 145px;
-      height: 145px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 1px solid #ddd;
-    }
-
     h1 {
-      margin: 0 0 5px 0;
-      font-size: 2.5rem;
-      font-weight: 600;
+      margin: 0 0 3px; font-family: Arial, Helvetica, sans-serif;
+      font-size: clamp(2rem, 5vw, 2.65rem); font-weight: 650;
+      letter-spacing: -0.04em; line-height: 1.2;
     }
-
-    .subtitle {
-      color: #666;
-      font-size: 1.15rem;
-    }
-
-    .affiliation {
-      color: #555;
-      margin-top: 8px;
-    }
-
-
-    /* ---------- Navigation ---------- */
-
-    nav {
-      margin-top: 25px;
-    }
-
-    nav a {
-      margin-right: 22px;
-      color: #333;
-      font-size: 0.95rem;
-    }
-
-
-    /* ---------- Sections ---------- */
-
-    section {
-      margin-bottom: 50px;
-    }
-
+    .role { margin: 5px 0; color: var(--muted); font-family: Arial, Helvetica, sans-serif; font-size: 1.03rem; }
+    .keywords { color: var(--muted); font-size: 0.96rem; }
+    nav {   display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            column-gap: 30px;
+            row-gap: 10px;
+            margin-top: 25px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.93rem;
+        }
+    nav a:hover {color: var(--accent); text-decoration: underline;}
+    main { padding-top: 10px; }
+    section { margin: 35px 0; scroll-margin-top: 20px; }
     h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 8px;
-      margin-bottom: 20px;
+      margin: 0 0 13px; padding-bottom: 7px;
+      border-bottom: 1px solid var(--line);
+      font-family: Arial, Helvetica, sans-serif; font-size: 1.22rem; font-weight: 650;
     }
-
-    p {
-      color: #444;
-    }
-
-
-    /* ---------- Research ---------- */
-
-    ul {
-      padding-left: 25px;
-    }
-
-    li {
-      margin-bottom: 7px;
-    }
-
-
-    /* ---------- Publications ---------- */
-
-    .publication {
-      margin-bottom: 28px;
-    }
-
-    .publication-title {
-      font-weight: 600;
-      font-size: 1.05rem;
-    }
-
-    .authors {
-      color: #444;
-    }
-
-    .venue {
-      color: #777;
-      font-size: 0.95rem;
-    }
-
-
-    /* ---------- Links ---------- */
-
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    .links a {
-      font-weight: 500;
-    }
-
-
-    /* ---------- Footer ---------- */
-
+    h3 { margin: 23px 0 10px; font-family: Arial, Helvetica, sans-serif; font-size: 1.02rem; }
+    p { margin: 0 0 14px; }
+    ul { margin: 8px 0 0; padding-left: 24px; }
+    li { margin: 0 0 7px; padding-left: 2px; }
+    .publication { margin: 0 0 22px; }
+    .pub-title { font-weight: bold; }
+    .authors { color: var(--muted); }
+    .venue { color: var(--muted); font-size: 0.96rem; }
+    .pub-links { font-family: Arial, Helvetica, sans-serif; font-size: 0.91rem; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px 20px; font-family: Arial, Helvetica, sans-serif; }
+    .contact-note { color: var(--muted); }
     footer {
-      border-top: 1px solid #ddd;
-      padding-top: 20px;
-      margin-top: 60px;
-      color: #777;
-      font-size: 0.9rem;
+      margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line);
+      color: var(--muted); font-family: Arial, Helvetica, sans-serif; font-size: 0.86rem;
     }
-
-
-    /* ---------- Mobile ---------- */
-
     @media (max-width: 600px) {
-
-      body {
-        padding: 30px 20px;
-      }
-
-      .profile {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 18px;
-      }
-
-      .profile-photo {
-        width: 125px;
-        height: 125px;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      nav a {
-        display: inline-block;
-        margin-bottom: 8px;
-      }
+      .page { padding: 28px 19px 22px; }
+      .identity { align-items: flex-start; gap: 16px; }
+      .photo { width: 94px; height: 94px; flex-basis: 94px; }
+      .role { font-size: 0.94rem; }
+      .keywords { font-size: 0.88rem; }
+      nav {
+           column-gap: 20px;
+           row-gap: 10px;
+          }
+      body { font-size: 16px; }
     }
-
+    @media (max-width: 390px) {
+      .identity { flex-direction: column; }
+      .photo { width: 108px; height: 108px; flex-basis: 108px; }
+    }
   </style>
 </head>
-
-
 <body>
-
-
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
-<header>
-
-  <div class="profile">
-
-    <!-- krishnamallickpic.jpg -->
-    <img
-      src="images/krishnamallickpic.jpg"
-      alt="Krishna Mallick"
-      class="profile-photo"
-    >
-
-    <div>
-
-      <h1>Krishna Mallick</h1>
-
-      <div class="subtitle">
-        Postdoctoral Researcher in Cryptography
+  <div class="page">
+    <header>
+      <div class="identity">
+        <img src="images/krishnamallickpic.jpg" alt="Portrait of Krishna Mallick" class="photo">
+        <div>
+          <h1>Krishna Mallick</h1>
+          <p class="role">Postdoctoral Researcher</p>
+          <div class="keywords">Cryptography</div>
+        </div>
       </div>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#Conferences and Talks">Conferences and Talks</a>
+       <!-- <a href="#projects">Projects</a>
+        <a href="#teaching">Teaching</a> -->
+        <a href="#links">Academic Links</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-      <div class="affiliation">
-        Cryptography · Boolean Functions · Finite Fields
-      </div>
+    <main>
+      <section id="about">
+        <h2>About</h2>
+        <p>
+          I am currently a senior project associate in the Department of Computer Science and Engineering
+          at the Indian Institute of Technology Kharagpur, working with Dr. Monosij Maitra. Previously,
+          I was a Visiting Fellow at the Advanced Computing and Microelectronics Unit, Indian Statistical
+          Institute, Kolkata, under the supervision of Prof. Sourav Chakraborty. I completed my Ph.D. in
+          Computer Sciences at the National Institute of Science Education and Research (NISER), Bhubaneswar,
+          under the supervision of Prof. Deepak Kumar Dalai.
+        </p>
+        <p>
+         I am primarily interested in analyzing the algebraic and structural properties of mathematical objects
+         used to build and evaluate cryptographic primitives. 
+        </p>
+      </section>
 
-    </div>
+      <section id="research">
+        <h2>Research Interests</h2>
+        <ul>
+          <li>Symmetric-Key Foundations and Finite Fields</li>
+          <li>Zero-knowledge proofs and algebraic-friendly cryptographic primitives</li>
+          <li>Lattice based digital signatures</li>
+          <li>Mathematical aspects of Lattices</li>
+        </ul>
+      </section>
 
-  </div>
+      <section id="publications">
+        <h2>Publications</h2>
 
+        <div class="publication">
+          <div class="pub-title">A class of weightwise almost perfectly balanced Boolean functions.</div>
+          <div class="authors">Deepak Kumar Dalai and Krishna Mallick.</div>
+          <div class="venue">Advances in Mathematics of Communications, 18(2): 480–504, 2024.</div>
+          <div class="pub-links"><a href="https://doi.org/10.3934/amc.2023048" target="_blank" rel="noopener">DOI</a></div>
+        </div>
 
-  <!-- Navigation -->
+        <div class="publication">
+          <div class="pub-title">Constructing WAPB Boolean functions from the direct sum of WAPB Boolean functions.</div>
+          <div class="authors">Deepak Kumar Dalai and Krishna Mallick.</div>
+          <div class="venue">Progress in Cryptology – INDOCRYPT 2024, Lecture Notes in Computer Science, vol. 15495, pp. 188–209, Springer, 2025.</div>
+          <div class="pub-links"><a href="https://doi.org/10.1007/978-3-031-80308-6_9" target="_blank" rel="noopener">DOI</a></div>
+        </div>
 
-  <nav>
+        <div class="publication">
+          <div class="pub-title">Weightwise almost perfectly balanced Boolean functions: Construction from a permutation group action view.</div>
+          <div class="authors">Deepak Kumar Dalai, Krishna Mallick, and Pierrick Méaux.</div>
+          <div class="venue">Designs, Codes and Cryptography, 94(4), article 82, 2026.</div>
+          <div class="pub-links"><a href="https://doi.org/10.1007/s10623-026-01818-w" target="_blank" rel="noopener">DOI</a></div>
+        </div>
 
-    <a href="#about">About</a>
+        <h3>Preprints</h3>
+        <div class="publication">
+          <div class="pub-title">A proof of a conjecture on permutation polynomials.</div>
+          <div class="authors">Krishna Mallick and Mohit Pal.</div>
+          <div class="venue">arXiv preprint, 2026.</div>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2608.09754" target="_blank" rel="noopener">arXiv abstract</a>
+            &nbsp;·&nbsp;
+            <a href="https://arxiv.org/pdf/2608.09754" target="_blank" rel="noopener">PDF</a>
+          </div>
+        </div>
+      </section>
+     
+ 
+<section id="Conferences and Talks">
+  <h2>Conferences and Talks</h2>
 
-    <a href="#research">Research</a>
+  <ul>
+    <li>
+      <strong>On the direct sum of weightwise almost perfectly balanced Boolean functions.</strong>
+      <em>In 9th International Workshop on Boolean Functions and their Applications (BFA), Cyprus · 2024.</em>
+    </li>
 
-    <a href="#publications">Publications</a>
+    <li>
+      <strong>A class of weightwise almost perfectly balanced Boolean functions with high weightwise nonlinearity.</strong>
+      <em>In 8th International Workshop on Boolean Functions and their Applications (BFA), Voss, Norway · 2023.</em>
+    </li>
 
-    <a href="#projects">Projects</a>
+    <li>
+      <strong>A class of weightwise almost perfectly balanced Boolean functions.</strong>
+      <em>In Algebraic and Combinatorial Methods for Coding and Cryptography (ALCOCRYPT), Marseille, France · 2023.</em>
+    </li>
 
-    <a href="#teaching">Teaching</a>
+    <li>
+      <strong>Constructing WAPB Boolean functions from the direct sum of WAPB Boolean functions.</strong>
+      <em>In INDOCRYPT 2024, Chennai, India · 2024.</em>
+    </li>
 
-    <a href="#contact">Contact</a>
+    <li>
+      <strong>Cryptographically Significant Weightwise (Almost) Perfectly Balanced Boolean Functions.</strong>
+      <em>Advanced Computing and Microelectronics Unit (ACMU), Indian Statistical Institute (ISI), Kolkata, India (In Department Seminar).</em>
+    </li>
+  </ul>
 
-  </nav>
-
-</header>
-
-
-
-<!-- =========================================================
-     ABOUT
-========================================================= -->
-
-<section id="about">
-
-  <h2>About Me</h2>
-
-  <p>
-    I am currently a senior project associate in the Department of Computer Science and Engineering at 
-    the Indian Institute of Technology(IIT) Kharagpur, working with Dr. Monosij Maitra. Previously, I was a visiting fellow at
-    Advanced Computing and Microelectronics Units, Indian Statistical Institute (ISI), Kolkata, under 
-    the supervision of Prof. Sourav Chakraborty. I am grateful to the ACMU community for their warm welcome and support 
-    during my time at ISI Kolkata. I completed my Ph.D. in Computer Sciences at the National Institute of 
-    Science Education and Research (NISER), Bhubaneswar, under the supervision of Prof. Deepak Kumar Dalai.
-  </p>
+</section>
     
-  <p>
-   My research interests broadly lie in cryptography and algebraic methods, with particular focus on theoretical aspects of 
-   symmetric key cryptography and related problems arising in the design and analysis of cryptographic constructions. Currently, 
-   I am exploring the design of zero-knowledge-friendly symmetric primitives. 
-  </p>
 
-</section>
+      <!--<section id="projects">
+        <h2>Research Projects</h2>
+        <ul>
+        </ul>
+      </section>
 
+      <section id="teaching">
+        <h2>Teaching</h2>
+        <p></p>
+        <ul>
+        </ul>
+      </section> -->
 
+      <section id="links">
+        <h2>Academic Links</h2>
+        <div class="links">
+          <!-- Replace the placeholder URLs below with your profile links. -->
+          <a href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://scholar.google.com/citations?user=8JjtaKwAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://orcid.org/0009-0001-1652-2896" target="_blank" rel="noopener">ORCID</a>
+        </div>
+      </section>
 
-<!-- =========================================================
-     RESEARCH
-========================================================= -->
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:krishna.mallickmath@gmail.com">krishna.mallickmath@gmail.com</a></p>
+        <p class="contact-note">I welcome academic discussions and collaborations in Boolean functions analysis and post-quantum cryptography.</p>
+      </section>
+    </main>
 
-<section id="research">
-
-  <h2>Research Interests</h2>
-
-  <ul>
-
-    <li>
-      Boolean Functions and Vectorial Boolean Functions: 
-    </li>
-
-    <li>
-      Finite Fields and Permutation Polynomials:
-    </li>
-
-    <li>
-      Symmetric-Key Cryptography:
-    </li>
-
-    <li>
-      Cryptographic S-Boxes:
-    </li>
-
-    <li>
-      Zero-Knowledge Proofs (ZKP):
-    </li>
-
-
-  </ul>
-
-</section>
-
-
-
-<!-- =========================================================
-     PUBLICATIONS
-========================================================= -->
-
-<section id="publications">
-
-  <h2>Publications</h2>
-
-
-  <!-- Publication 1 -->
-
-  <div class="publication">
-
-    <div class="publication-title">
-        A class of weightwise almost perfectly balanced Boolean functions.
-    </div>
-
-    <div class="authors">
-      Deepak Kumar Dalai and Krishna Mallick.
-    </div>
-
-    <div class="venue">
-      Advances in Mathematics of Communications, Vol 18(2): 480-504, 2024.
-    </div>
-
-    <div>
-      <a href="YOUR_PAPER_LINK">
-        [https://doi.org/10.3934/amc.2023048]
-      </a>
-    </div>
-
+    <footer>© 2026 Krishna Mallick</footer>
   </div>
-
-
-  <!-- Publication 2 -->
-
-  <div class="publication">
-
-    <div class="publication-title">
-     Constructing WAPB Boolean functions from the direct sum of WAPB Boolean functions.
-    </div>
-
-    <div class="authors">
-     Deepak Kumar Dalai and Krishna Mallick
-    </div>
-
-    <div class="venue">
-      Progress in Cryptology- INDOCRYPT 2024, Lecture Notes in Computer Science (LNCS), Vol 15495, page: 188-209, 2025, Springer.
-    </div>
-
-    <div>
-      <a href="YOUR_PAPER_LINK">
-        [https://doi.org/10.1007/978-3-031-80308-6_9]
-      </a>
-    </div>
-
-  </div>
-
-
-  <!-- Publication 3 -->
-
-  <div class="publication">
-
-    <div class="publication-title">
-      Weightwise almost perfectly balanced Boolean functions, construction from a permutation group action view.
-    </div>
-
-    <div class="authors">
-      Deepak Kumar Dalai, Krishna Mallick and Pierrick M\'eaux
-    </div>
-
-    <div class="venue">
-      Des. Codes Cryptogr. 94(4): 82 (2026)
-    </div>
-
-    <div>
-      <a href="YOUR_PAPER_LINK">
-        [https://doi.org/10.1007/s10623-026-01818-w]
-      </a>
-    </div>
-
-  </div>
-
-      <h3>Preprints</h3>
-
-  <div class="publication">
-
-    <div class="publication-title">
-    A proof of a conjecture on permutation polynomials.
-    </div>
-
-    <div class="authors">
-     Krishna Mallick and Mohit Pal
-    </div>
-
-    <div class="venue">
-     arXiv preprint arXiv:2608.09754, 2026
-    </div>
-
-    <div>
-      <a href="YOUR_PREPRINT_LINK" target="_blank">
-        [https://doi.org/10.48550/arXiv.2608.0975]
-      </a>
-
-      &nbsp;
-
-      <a href="YOUR_PDF_LINK" target="_blank">
-        [PDF]
-      </a>
-    </div>
-
-  </div>
-
-    
-</section>
-
-
-
-<!-- =========================================================
-     PROJECTS
-========================================================= -->
-
-<section id="projects">
-
-  <h2>Research Projects</h2>
-
-  <ul>
-
-    <li>
-      <strong>Boolean Functions:</strong>
-      Construction and analysis of cryptographically significant
-      Boolean functions.
-    </li>
-
-    <li>
-      <strong>Permutation Polynomials:</strong>
-      Algebraic and computational study of permutation mappings
-      over finite fields.
-    </li>
-
-    <li>
-      <strong>Cryptographic S-Boxes:</strong>
-      Study of nonlinear vectorial Boolean functions for
-      symmetric-key cryptography.
-    </li>
-
-    <li>
-      <strong>ZKP / MPC / FHE:</strong>
-      Exploring algebraic constructions and symmetric primitives
-      suitable for privacy-preserving computation.
-    </li>
-
-  </ul>
-
-</section>
-
-
-
-<!-- =========================================================
-     T
-========================================================= -->
-
-<section id="teaching">
-
-  <h2>Teaching</h2>
-
-  <p>
-    I am interested in teaching and explaining cryptography from
-    mathematical foundations to practical constructions.
-  </p>
-
-  <ul>
-
-    <li>Cryptography</li>
-
-    <li>Information Theory</li>
-
-    <li>Boolean Functions</li>
-
-    <li>Finite Fields</li>
-
-    <li>Stream Ciphers and LFSRs</li>
-
-    <li>Secure Multi-Party Computation</li>
-
-  </ul>
-
-</section>
-
-
-
-<!-- =========================================================
-     CV AND LINKS
-========================================================= -->
-
-<section>
-
-  <h2>Academic Links</h2>
-
-  <div class="links">
-
-    <!-- CV -->
-    <a href="assets/Krishna_Mallick_CV.pdf">
-      CV
-    </a>
-
-    <!-- GitHub -->
-    <a
-      href="https://github.com/YOUR_USERNAME"
-      target="_blank"
-      rel="noopener">
-      GitHub
-    </a>
-
-    <!-- Google Scholar -->
-    <a
-      href="YOUR_GOOGLE_SCHOLAR_LINK"
-      target="_blank"
-      rel="noopener">
-      Google Scholar
-    </a>
-
-    <!-- ORCID -->
-    <a
-      href="YOUR_ORCID_LINK"
-      target="_blank"
-      rel="noopener">
-      ORCID
-    </a>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     CONTACT
-========================================================= -->
-
-<section id="contact">
-
-  <h2>Contact</h2>
-
-  <p>
-    Email:
-    <a href="mailto:YOUR_EMAIL@example.com">
-      YOUR_EMAIL@example.com
-    </a>
-  </p>
-
-  <p>
-    I am open to discussions and collaborations in cryptography,
-    Boolean functions, finite fields, and privacy-preserving
-    cryptographic systems.
-  </p>
-
-</section>
-
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer>
-
-  © 2026 Krishna Mallick
-
-</footer>
-
-
 </body>
-
 </html>
